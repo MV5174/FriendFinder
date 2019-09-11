@@ -182,6 +182,27 @@
         <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit">Submit</button>
         <hr>
 
+        <div id="results-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+        
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">×</button>
+                  <h2 class="modal-title"><strong>Best Match</strong></h2>
+                </div>
+                <div class="modal-body">
+                  <h2 id="match-name"></h2>
+                  <img id="match-img" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+        
+            </div>
+          </div>
+
         <footer class="footer">
             <div class="container">
                 <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/MV5174/FriendFinder">GitHub
@@ -202,16 +223,18 @@
     var newFriend = {
       friendName: $("#name").val().trim(),
       friendPic: $("#photo").val().trim(),
-      q1: $("#q1").val(),
-      q2: $("#q2").val(),
-      q3: $("#q3").val(),
-      q4: $("#q4").val(),
-      q5: $("#q5").val(),
-      q6: $("#q6").val(),
-      q7: $("#q7").val(),
-      q8: $("#q8").val(),
-      q9: $("#q9").val(),
-      q10: $("#q10").val(),
+      scores: [
+        $("#q1").val(),
+        $("#q2").val(),
+        $("#q3").val(),
+        $("#q4").val(),
+        $("#q5").val(),
+        $("#q6").val(),
+        $("#q7").val(),
+        $("#q8").val(),
+        $("#q9").val(),
+        $("#q10").val()
+    ]
     };
 
     console.log(newFriend);
@@ -222,6 +245,11 @@
         // If it works
         if (data) {
           alert("Yay! You are officially a friend thanks for the help!");
+          
+          $("#match-name").text(data.friendName);
+          $("match-img").attr("src", data.friendPic);
+
+          $("#results-modal").modal("toggle");
         }
 
         // If it doesn't
