@@ -245,9 +245,9 @@
         // If it works
         if (data) {
           alert("Yay! You are officially a friend thanks for the help!");
-          
-          $("#match-name").text(data.friendName);
-          $("match-img").attr("src", data.friendPic);
+
+          $("#match-name").text(data.name);
+          $("#match-img").attr("src", data.pic);
 
           $("#results-modal").modal("toggle");
         }
